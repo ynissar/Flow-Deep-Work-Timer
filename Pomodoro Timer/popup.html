@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pomodoro Timer</title>
+        <style>
+            body {
+                outline-width: 2px;
+                outline-style: solid;
+                outline-color: red;
+                padding: 5px;
+                text-align:center;
+                width: 400px;
+                height: 255px;
+            }
+            
+            #icon {
+                width: 175px;
+                margin: 5px;
+            }
+
+            .serif {
+                font-family:Arial, Helvetica, sans-serif;
+            }
+
+            .btn-group .button {
+                background-color: #f44336;
+                border: solid #d2190b;
+                color: white;
+                text-align: center;
+                text-decoration: none;
+                padding: 20px 24px;
+                font-size: 16px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+                float: left;
+            }
+
+            .btn-group :after {
+                content: "";
+                clear:both;
+                display: table;
+            }
+
+            .btn-group .button:hover {
+                background-color: #4CAF50;
+                color: white;
+                border: solid green;
+            }
+
+            .btn-group .button:not(:last-child) {
+                border-right: none;
+            }
+
+            .container_center {
+                display:flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="Largeicon.png" id="icon" alt="Pomodoro Icon">
+        <div class="btn-group">
+            <button class="serif button" style="width: 50%" id="start" value="25">Start</button>
+            <button class="serif button" style="width: 50%" id="cancel">cancel</button>
+        </div>
+        <script src="popup.js"></script>
+    </body>
+</html>
