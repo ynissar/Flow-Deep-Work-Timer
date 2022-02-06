@@ -1,35 +1,84 @@
-let curTime = new Date();
 let alarmTime = new Date();
-console.log(curTime);
 
-let curDate = curTime.getDate();
-let curHours = curTime.getHours();
-let curMinutes = curTime.getMinutes();
-let curSeconds = curTime.getSeconds();
+let { curTime, curDate, curHours, curMinutes, curSeconds } =
+  getCurrentTimeData();
 let alarmLengthInMin = 75;
 let alarmLengthInSec = alarmLengthInMin * 60;
 
-calculateAlarmTime(
-  curDate,
-  curHours,
-  curMinutes,
-  curSeconds,
-  alarmLengthInSec,
-  alarmTime
-);
+document.getElementById("start").addEventListener("click", () => {
+  if (document.getElementById("start") != null) {
+    startTimer();
+  }
+});
 
-console.log(alarmTime);
-
-let difference = Math.abs(alarmTime - curTime);
-console.log(difference); // difference in milliseconds
-
+displayTime(alarmLengthInSec);
 function continueTimer() {}
 
-function startTimer() {}
+function startTimer() {
+  let timeData = getCurrentTimeData();
+  let { curTime, curDate, curHours, curMinutes, curSeconds } = timeData;
 
-function pauseTimer() {}
+  calculateAlarmTime(
+    curDate,
+    curHours,
+    curMinutes,
+    curSeconds,
+    alarmLengthInSec,
+    alarmTime
+  );
+
+  let difference = Math.abs(alarmTime - curTime);
+
+  chrome.alarms.create("timer", { when: Date.now() + difference }); // alarm to track when the timer is finished
+
+  chrome.storage.sync.set({
+    alarmInfo: { isTimerRunning: true, alarmEnd: Date.now() + difference },
+  });
+
+  let countDown = setInterval(() => {
+    displayTime(difference / 1000); // divide by 1000 to make it into seconds
+    if (difference == 0) {
+      clearInterval(countDown);
+    }
+    difference = difference - 1000;
+  }, 1000);
+
+  document.getElementById("start").innerHTML = "pause";
+  document.getElementById("start").id = "pause";
+  document.getElementById("pause").addEventListener("click", () => {
+    if (document.getElementById("pause") != null) {
+      pauseTimer();
+    }
+  });
+}
+
+function pauseTimer() {
+  console.log(document.getElementById("pause").id);
+}
 
 function restartTimer() {}
+
+// Updates timer to reflect
+function displayTime(alarmTimeLeftInSec) {
+  let min = Math.floor(alarmTimeLeftInSec / 60);
+  let sec = Math.floor(alarmTimeLeftInSec % 60);
+  const timer = document.getElementById("timer");
+  timer.innerHTML = `${min}:${sec < 10 ? "0" : ""}${sec}`;
+}
+
+// Returns current time object with all important properties
+function getCurrentTimeData() {
+  let curTime = new Date();
+  let curData = {
+    curTime: curTime,
+    curDate: curTime.getDate(),
+    curHours: curTime.getHours(),
+    curMinutes: curTime.getMinutes(),
+    curSeconds: curTime.getSeconds(),
+  };
+
+  return curData;
+}
 
 // Updates the given date object (alarmTime) with the day, hour, minute and second when the alarm should trigger
 function calculateAlarmTime(
