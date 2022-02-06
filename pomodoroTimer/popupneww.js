@@ -1,5 +1,6 @@
 let alarmTime = new Date();
 let displayCountdown; // global variable for timed display of the count down
+let displayedTime = false;
 
 let { curTime, curDate, curHours, curMinutes, curSeconds } =
   getCurrentTimeData();
@@ -14,8 +15,76 @@ document.getElementById("start").addEventListener("click", () => {
 
 document.getElementById("reset").addEventListener("click", restartTimer);
 
-displayTime(alarmLengthInSec);
-function continueTimer() {}
+chrome.storage.sync.get(["alarmTimeElapsed"], (result) => {
+  alarmTimeElapsed = result.alarmTimeElapsed;
+  displayTime(alarmTimeElapsed / 1000);
+  displayedTime = true;
+});
+
+if (displayedTime == false) {
+  displayTime(alarmLengthInMin);
+}
+
+continueTimer();
+
+function continueTimer() {
+  chrome.storage.sync.get(["isTimerRunning"], (running) => {
+    let isTimerRunning = running.isTimerRunning;
+    if (isTimerRunning) {
+      chrome.storage.sync.get(["alarmEnd"], (alarm) => {
+        let alarmTime = alarm.alarmEnd;
+        let timeData = getCurrentTimeData();
+        let { curTime } = timeData;
+
+        let difference = Math.abs(alarmTime - curTime);
+
+        displayCountdown = setInterval(() => {
+          displayTime(difference / 1000); // divide by 1000 to make it into seconds
+          if (difference == 0) {
+            clearInterval(countDown);
+          }
+          difference = difference - 1000;
+          chrome.storage.sync.set({ alarmTimeElapsed: difference });
+          console.log(difference);
+        }, 1000);
+
+        let startButton = document.getElementById("start");
+        startButton.remove();
+
+        let pauseButton = document.createElement("button");
+        pauseButton.innerHTML = "pause";
+        pauseButton.id = "pause";
+
+        let btnGroup = document.getElementById("btn-group");
+        btnGroup.insertBefore(pauseButton, btnGroup.childNodes[0]);
+
+        // creates an event listener for pause
+        document.getElementById("pause").addEventListener("click", () => {
+          if (document.getElementById("pause") != null) {
+            pauseTimer();
+          }
+        });
+      });
+    } else {
+      let startButton = document.getElementById("start");
+      startButton.remove();
+
+      let unpauseButton = document.createElement("button");
+      unpauseButton.innerHTML = "start";
+      unpauseButton.id = "unpause";
+
+      let btnGroup = document.getElementById("btn-group");
+      btnGroup.insertBefore(unpauseButton, btnGroup.childNodes[0]);
+
+      // creates an event listener for pause
+      document.getElementById("unpause").addEventListener("click", () => {
+        if (document.getElementById("unpause") != null) {
+          unpauseTimer();
+        }
+      });
+    }
+  });
+}
 
 function startTimer() {
   let timeData = getCurrentTimeData();
@@ -31,6 +100,9 @@ function startTimer() {
   );
 
   let difference = Math.abs(alarmTime - curTime);
+  //   console.log(difference);
+  //   difference = Math.abs(Date.now() + difference - curTime);
+  //   console.log(difference);
 
   chrome.alarms.create("timer", { when: Date.now() + difference }); // alarm to track when the timer is finished
 
@@ -137,6 +209,8 @@ function restartTimer() {
   clearInterval(displayCountdown);
 
   chrome.alarms.clear("timer");
+  chrome.storage.sync.set({ isTimerRunning: false });
+  chrome.storage.sync.set({ alarmTimeElapsed: alarmLengthInSec * 1000 });
 
   displayTime(alarmLengthInSec);
 
