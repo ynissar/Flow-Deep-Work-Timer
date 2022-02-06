@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap");
+body {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #97d6a6;
+  padding: 5px;
+  text-align: center;
+  width: 250px;
+  height: 400px;
+  background-color: #1b2124;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#circle {
+  display: flex;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #97d6a6;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  margin-top: 25px;
+}
+
+.timer {
+  color: #97d6a6;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-group .button {
+  background-color: #97d6a6;
+  color: #1b2124;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #97d6a6;
+  margin: 10px;
+  width: 200px;
+  height: 45px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  float: left;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.btn-group .reset {
+  background-color: #d62822;
+  color: #1b2124;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #d62822;
+}
+
+.btn-group .button:hover {
+  background-color: transparent;
+  border: 2px solid #97d6a6;
+  color: #97d6a6;
+}
+
+.btn-group .reset:hover {
+  background-color: transparent;
+  border: 2px solid #d62822;
+  color: #d62822;
+}
