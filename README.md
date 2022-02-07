@@ -8,7 +8,7 @@ Flow is in its early stages, so feedback is welcome and appreciated!
 
 ## Demo
 
-![App Demo](https://imgur.com/gallery/gok4kVA)
+![App Demo](./pomodoroTimer/screenshots/appGif.gif)
 
 ## Lessons Learned
 
@@ -31,26 +31,12 @@ What optimizations did you make in your code? E.g. refactors, performance improv
 
 ## Run Locally
 
-Clone the project
+1. Clone the project
 
 ```bash
   git clone https://link-to-project
 ```
 
-Go to the project directory
+2. Go to chrome://extensions on your chrome browser
 
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
+3. Click on Load Unpacked and select the location of this repository. This should add the extension to your chrome
