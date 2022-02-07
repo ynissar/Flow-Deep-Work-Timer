@@ -2,7 +2,7 @@ let alarmTime = new Date(); // global alarm variable --> time when alarm ends
 let displayCountdown; // global variable for timed display of the count down
 let displayedTime = false; // Whether time has been displayed already
 
-let alarmLengthInMin = 5; // Length of alarm
+let alarmLengthInMin = 25; // Length of alarm
 let alarmLengthInSec = alarmLengthInMin * 60; // length of alarm in minutes
 
 chrome.storage.sync.set({ alarmLengthInMin: alarmLengthInMin });
