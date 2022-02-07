@@ -1,4 +1,4 @@
-![Logo](./pomodoroTimer/logos/fullLogo.png)
+![Logo](./Flow/logos/fullLogo.png)
 
 # Flow - Deep Work Tracker
 
@@ -8,7 +8,7 @@ Flow is in its early stages, so feedback is welcome and appreciated!
 
 ## Demo
 
-![App Demo](./pomodoroTimer/screenshots/appGif.gif)
+![App Demo](./Flow/screenshots/appGif.gif)
 
 ## Lessons Learned
 
@@ -26,8 +26,8 @@ What optimizations did you make in your code? E.g. refactors, performance improv
 
 ## Screenshots
 
-![App Screenshot](./pomodoroTimer/screenshots/extension.png)
-![App Screenshot](./pomodoroTimer/screenshots/notification.png)
+![App Screenshot](./Flow/screenshots/extension.png)
+![App Screenshot](./Flow/screenshots/notification.png)
 
 ## Run Locally
 
