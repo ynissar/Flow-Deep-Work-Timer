@@ -20,10 +20,6 @@ Using this API, I would adapted to this more asynchronous-mode of thinking.
 This project was unique for me due to the lack of online resources to go to.
 There does not seem to be a strong chrome extensions community online, so you are forced to explore and deal with your problems on your own.
 
-## Optimizations
-
-What optimizations did you make in your code? E.g. refactors, performance improvements, accessibility
-
 ## Screenshots
 
 ![App Screenshot](./Flow/screenshots/extension.png)
