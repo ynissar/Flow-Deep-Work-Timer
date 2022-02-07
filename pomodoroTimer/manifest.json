@@ -12,11 +12,11 @@
     "default_popup": "popup.html",
     "default_title": "Flow - Deep Work Timer",
     "default_icon": {
-      "128": "smallLogo.png"
+      "128": "logos/smallLogo.png"
     }
   },
   "icons": {
-    "128": "smallLogo.png"
+    "128": "logos/smallLogo.png"
   },
   "manifest_version": 2
 }
