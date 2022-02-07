@@ -5,9 +5,21 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="circle">
+    <!-- <div id="circle">
       <h1 id="timer" class="timer">00:00</h1>
+    </div> -->
+
+    <div class="skill">
+      <div class="outer">
+        <img src="logos.png" alt="logo" />
+      </div>
     </div>
+
+    <svg version="1.1" width="220px" height="220px">
+      <circle id="circle" cx="110" cy="110" r="100" stroke-linecap="round" />
+    </svg>
+
+    <h1 id="timer">00:00</h1>
     <div class="btn-group" id="btn-group">
       <button class="button" id="start">Start</button>
       <button class="button reset" id="reset">Reset</button>

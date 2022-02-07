@@ -7,6 +7,8 @@ let { curTime, curDate, curHours, curMinutes, curSeconds } =
 let alarmLengthInMin = 25;
 let alarmLengthInSec = alarmLengthInMin * 60;
 
+chrome.storage.sync.set({ alarmLengthInMin: alarmLengthInMin });
+
 document.getElementById("start").addEventListener("click", () => {
   if (document.getElementById("start") != null) {
     startTimer();
@@ -40,8 +42,12 @@ function continueTimer() {
 
         displayCountdown = setInterval(() => {
           displayTime(difference / 1000); // divide by 1000 to make it into seconds
-          if (difference == 0) {
-            clearInterval(countDown);
+          if (difference <= 1000) {
+            clearInterval(displayCountdown);
+            chrome.storage.sync.set({ isTimerRunning: false });
+            chrome.storage.sync.set({
+              alarmTimeElapsed: alarmLengthInSec * 1000,
+            });
           }
           difference = difference - 1000;
           chrome.storage.sync.set({ alarmTimeElapsed: difference });
@@ -102,9 +108,6 @@ function startTimer() {
   );
 
   let difference = Math.abs(alarmTime - curTime);
-  //   console.log(difference);
-  //   difference = Math.abs(Date.now() + difference - curTime);
-  //   console.log(difference);
 
   chrome.alarms.create("timer", { when: Date.now() + difference }); // alarm to track when the timer is finished
 
@@ -113,16 +116,15 @@ function startTimer() {
 
   displayCountdown = setInterval(() => {
     displayTime(difference / 1000); // divide by 1000 to make it into seconds
-    if (difference == 0) {
-      clearInterval(countDown);
+    if (difference <= 1000) {
+      clearInterval(displayCountdown);
+      chrome.storage.sync.set({ isTimerRunning: false });
+      chrome.storage.sync.set({ alarmTimeElapsed: alarmLengthInSec * 1000 });
     }
     difference = difference - 1000;
     chrome.storage.sync.set({ alarmTimeElapsed: difference });
     console.log(difference);
   }, 1000);
-
-  //   document.getElementById("start").innerHTML = "pause"; // changed the button to say pause
-  //   document.getElementById("start").id = "pause"; // changes the id of the button to pause
 
   let startButton = document.getElementById("start");
   startButton.remove();
@@ -149,10 +151,6 @@ function pauseTimer() {
   chrome.storage.sync.set({ isTimerRunning: false });
 
   chrome.alarms.clear("timer");
-
-  //   chrome.alarms.get("timer", (alarm) => {
-  //     console.log(alarm);
-  //   });
 
   let pauseButton = document.getElementById("pause");
   pauseButton.remove();
@@ -183,8 +181,10 @@ function unpauseTimer() {
     //console.log(`Difference at start of unpause: ${difference}`);
     displayCountdown = setInterval(() => {
       displayTime(difference / 1000); // divide by 1000 to make it into seconds
-      if (difference == 0) {
-        clearInterval(countDown);
+      if (difference <= 1000) {
+        clearInterval(displayCountdown);
+        chrome.storage.sync.set({ isTimerRunning: false });
+        chrome.storage.sync.set({ alarmTimeElapsed: alarmLengthInSec * 1000 });
       }
       difference = difference - 1000;
       chrome.storage.sync.set({ alarmTimeElapsed: difference });
@@ -246,6 +246,11 @@ function displayTime(alarmTimeLeftInSec) {
   let sec = Math.floor(alarmTimeLeftInSec % 60);
   const timer = document.getElementById("timer");
   timer.innerHTML = `${min}:${sec < 10 ? "0" : ""}${sec}`;
+  const progressCircle = document.getElementById("circle");
+  progressCircle.style.strokeDashoffset = Math.floor(
+    627 * ((alarmLengthInSec - alarmTimeLeftInSec) / alarmLengthInSec)
+  );
+  console.log(progressCircle.style.strokeDashoffset);
 }
 
 // Returns current time object with all important properties

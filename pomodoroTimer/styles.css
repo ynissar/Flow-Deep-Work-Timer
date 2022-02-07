@@ -1,35 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cardo&family=Zen+Kaku+Gothic+Antique:wght@300;400;500&family=Zen+Maru+Gothic:wght@300;400;500&display=swap");
 body {
-  outline-width: 1px;
+  /* outline-width: 1px;
   outline-style: solid;
-  outline-color: #97d6a6;
-  padding: 5px;
-  text-align: center;
-  width: 250px;
+  outline-color: #97d6a6; */
+  /* text-align: center; */
+  width: 300px;
   height: 400px;
-  background-color: #1b2124;
+  background-color: #97d6a6;
   display: flex;
-  flex-direction: column;
   align-items: center;
-}
-
-#circle {
-  display: flex;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #97d6a6;
-  background-color: transparent;
-  align-items: center;
+  font-family: "Zen Maru Gothic", sans-serif;
   justify-content: center;
-  margin-bottom: 50px;
-  margin-top: 25px;
+  flex-direction: column;
 }
 
-.timer {
-  color: #97d6a6;
+#timer {
+  color: #1b2124;
+  font-family: "Cardo", serif;
+  font-weight: 400;
+  font-size: 48px;
+  margin: 0;
 }
 
 .btn-group {
@@ -42,34 +32,68 @@ body {
   color: #1b2124;
   text-align: center;
   text-decoration: none;
-  border: 2px solid #97d6a6;
-  margin: 10px;
-  width: 200px;
-  height: 45px;
+  border: 2px solid #1b2124;
+  margin: 5px;
+  width: 240px;
+  height: 50px;
   transition-duration: 0.4s;
   cursor: pointer;
   float: left;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 300;
+  border-radius: 6px;
 }
 
 .btn-group .reset {
-  background-color: #d62822;
-  color: #1b2124;
+  background-color: #1b2124;
+  color: #97d6a6;
   text-align: center;
   text-decoration: none;
-  border: 2px solid #d62822;
+  border: 2px solid #1b2124;
+  margin-bottom: 25px;
 }
 
 .btn-group .button:hover {
   background-color: transparent;
-  border: 2px solid #97d6a6;
-  color: #97d6a6;
+  border: 2px solid rgb(73, 90, 99);
+  color: rgb(73, 90, 99);
 }
 
 .btn-group .reset:hover {
-  background-color: transparent;
+  background-color: #d62822;
   border: 2px solid #d62822;
-  color: #d62822;
+  color: #1b2124;
+}
+
+.skill {
+  margin-top: 30px;
+  width: 210px;
+  height: 210px;
+  /* background: cornflowerblue; */
+}
+
+.outer {
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgba(190, 255, 206, 0.7);
+}
+
+circle {
+  fill: none;
+  stroke: #1b2124;
+  stroke-width: 10px;
+  stroke-dasharray: 627;
+  stroke-dashoffset: 627;
+  position: absolute;
+}
+
+svg {
+  position: absolute;
+  top: 10px;
+  transform: rotate(-90deg);
 }

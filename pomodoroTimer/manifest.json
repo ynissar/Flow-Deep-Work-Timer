@@ -1,9 +1,9 @@
 {
   "name": "Flow - Deep Work Timer",
-  "description": "A quick and easy way to be productive! Utilizes 75 minute work periods and 5 minute break periods.",
+  "description": "A quick and easy way to be productive! Utilizes 25 minute work periods and 5 minute break periods.",
   "version": "1.1",
   "author": "Yusuf Nissar",
-  "permissions": ["alarms", "notifications", "storage", "activeTab"],
+  "permissions": ["alarms", "notifications", "storage"],
   "background": {
     "scripts": ["background.js"],
     "persistent": false
@@ -12,11 +12,11 @@
     "default_popup": "popup.html",
     "default_title": "Flow - Deep Work Timer",
     "default_icon": {
-      "128": "smallpicon.png"
+      "128": "smallLogo.png"
     }
   },
   "icons": {
-    "128": "smallpicon.png"
+    "128": "smallLogo.png"
   },
   "manifest_version": 2
 }
