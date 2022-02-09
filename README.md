@@ -30,7 +30,7 @@ There does not seem to be a strong chrome extensions community online, so you ar
 1. Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/Waldohatesyou/Flow-Deep-Work-Timer.git
 ```
 
 2. Go to chrome://extensions on your chrome browser
